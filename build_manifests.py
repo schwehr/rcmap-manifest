@@ -103,7 +103,9 @@ LAND_TYPES = [
     'shrub', 'non_sagebrush_shrub', 'perennial_herbaceous', 'tree',
 ]
 
-STAT_TYPES = ['bp_year', 'segment_pvalue', 'segment_slope']
+#  40M 2023/01/03 11:51:46 gs://ee-nlcd-upload/rcmap_shrub_break_point_2021.tif
+
+STAT_TYPES = ['break_point', 'segment_pvalue', 'segment_slope']
 
 
 
