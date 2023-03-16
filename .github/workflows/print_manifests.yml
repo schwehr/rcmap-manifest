@@ -1,0 +1,15 @@
+# Continuous Integration (CI)
+
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Print Manifests
+        run: ./build_manifests.py
