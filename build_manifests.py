@@ -138,7 +138,7 @@ def yearly(year: int) -> dict[str, object]:
   result = {
       'name': f'{BASE_ID}RCMAP_V5_TRENDS_year/{year}',
       'tilesets': tilesets,
-      # DO NOT SUBMIT 'bands': bands,
+      'bands': bands,
       'startTime': f'{year}-01-01T00:00:00Z',
       'endTime': f'{year+1}-01-01T00:00:00Z',
   }
