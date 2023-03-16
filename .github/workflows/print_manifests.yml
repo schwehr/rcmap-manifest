@@ -11,5 +11,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+      - name: What is in the directory
+        run: ls -l
       - name: Print Manifests
         run: ./build_manifests.py
