@@ -114,6 +114,7 @@ def yearly(year: int) -> dict[str, object]:
   tilesets = []
   for stat_type in STAT_TYPES:
     for land_type in LAND_TYPES:
+      name = {land_type}_{stat_type}
       # gs://ee-nlcd-upload/rcmap_annual_herbaceous_break_point_2021.tif
       # gs://ee-nlcd-upload/rcmap_tree_segment_slope_2004.tif
       path = f'{BUCKET}{land_type}_{stat_type}_{year}.tif'
@@ -144,7 +145,7 @@ def yearly(year: int) -> dict[str, object]:
 
 
 def main():
-  print(json.dumps(trends(), indent=2))
+  # print(json.dumps(trends(), indent=2))
   print('\n\n========================\n\n')
 
   print(json.dumps(yearly(2021), indent=2))
