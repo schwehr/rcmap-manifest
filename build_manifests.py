@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2023 Google Inc. All Rights Reserved.
 """
@@ -136,11 +137,12 @@ def yearly(year: int) -> dict[str, object]:
 
 
 def main():
-  # print(json.dumps(trends(), indent=2))
+  print(json.dumps(trends(), indent=2))
 
-  print(json.dumps(yearly(2021), indent=2))
-  # for year in range():
-  #   print(json.dumps(yearly(), indent=2))
+  # print(json.dumps(yearly(2021), indent=2))
+  for year in range(1985, 2022):
+    print(f'\n\n==================== {year} ====================\n\n')
+    print(json.dumps(yearly(year), indent=2))
 
 if __name__ == '__main__':
   main()
