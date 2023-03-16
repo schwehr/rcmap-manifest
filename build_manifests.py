@@ -33,13 +33,7 @@ BUCKET = 'gs://ee-nlcd-upload/rcmap_'
 MODE = 'mode'
 MEAN = 'mean'
 
-# TODO(schwehr): All MEAN, yes?
-STAT_TYPES = ['break_point', 'segment_pvalue', 'segment_slope']
 
-LAND_TYPES = [
-    'annual_herbaceous', 'bare_ground', 'herbaceous', 'litter', 'sagebrush',
-    'shrub', 'non_sagebrush_shrub', 'perennial_herbacous', 'tree',
-]
 
 # bp_count 101 and 4 - 8bit unsigned - MODE
 # bp_year none - 1bit unsigned - MODE
@@ -104,15 +98,28 @@ def trends() -> dict[str, object]:
 
 # gs://ee-nlcd-upload/rcmap_annual_herbaceous_segment_slope_2021.tif"
 
+LAND_TYPES = [
+    'annual_herbaceous', 'bare_ground', 'herbaceous', 'litter', 'sagebrush',
+    'shrub', 'non_sagebrush_shrub', 'perennial_herbaceous', 'tree',
+]
+
+STAT_TYPES = ['bp_year', 'segment_pvalue', 'segment_slope']
+
+
+
 def yearly(year: int) -> dict[str, object]:
   """Returns a manifest structure."""
+  BUCKET = 'gs://ee-nlcd-upload/rcmap_'
+
   tilesets = []
-  for stat in STAT_TYPES:
-    for land in LAND_TYPES:
-      name = f'{land}_{stat}'
-      tilesets.append({
-          'id': name,
-          'sources': [{'uris': f'{BUCKET}annual_{name}_{year}.tif'}]})
+  for stat_type in STAT_TYPES:
+    for land_type in LAND_TYPES:
+      # gs://ee-nlcd-upload/rcmap_annual_herbaceous_break_point_2021.tif
+      # gs://ee-nlcd-upload/rcmap_tree_segment_slope_2004.tif
+      path = f'{BUCKET}{land_type}_{stat_type}_{year}.tif'
+
+      # TODO is uris an array or single string
+      tilesets.append({'id': name, 'sources': [{'uris': path}]})
 
   bands = []
   for stat in STAT_TYPES:
@@ -126,7 +133,7 @@ def yearly(year: int) -> dict[str, object]:
       bands.append(entry)
 
   result = {
-      'name': BASE_ID + 'RCMAP_V5_TRENDS_year',
+      'name': f'{BASE_ID}RCMAP_V5_TRENDS_year/{year}',
       'tilesets': tilesets,
       # DO NOT SUBMIT 'bands': bands,
       'startTime': f'{year}-01-01T00:00:00Z',
@@ -138,6 +145,7 @@ def yearly(year: int) -> dict[str, object]:
 
 def main():
   print(json.dumps(trends(), indent=2))
+  print('\n\n========================\n\n')
 
   print(json.dumps(yearly(2021), indent=2))
   # for year in range(1985, 2022):
