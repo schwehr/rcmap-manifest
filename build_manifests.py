@@ -7,7 +7,7 @@ USGS RCMAP Manifest generation.
 gs://ee-nlcd-upload
 
 var trends = ee.Image('projects/ee-rcmap/assets/RCMAP_V5_TRENDS/TRENDS');
-var dataset = ee.ImageCollection('projects/ee-rcmap/assets/RCMAP_V5_TRENDS/year');
+var dataset = ee.ImageCollection('projects/ee-rcmap/assets/RCMAP_V5_TRENDS/YEAR');
 
 print(dataset);
 """
