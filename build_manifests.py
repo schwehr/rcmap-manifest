@@ -136,7 +136,7 @@ def trends() -> dict[str, object]:
   result = {
       'name': BASE_ID + 'RCMAP_V5_TRENDS',
       'tilesets': tilesets,
-      # 'bands': bands,
+      'bands': bands,
       'startTime': '1985-01-01T00:00:00Z',
       'endTime': '2022-01-01T00:00:00Z',
   }
