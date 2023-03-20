@@ -106,13 +106,21 @@ def yearly(year: int) -> dict[str, object]:
 
 
 def main():
-  print(json.dumps(trends(), indent=2))
+  trends_json = json.dumps(trends(), indent=2)
+  print(trends_json)
+
+  with open('rcmap_trends_manifest.json', 'w') as out:
+    out.write(trends_json)
+
   print('\n\n========================\n\n')
 
   print(json.dumps(yearly(2021), indent=2))
-  # for year in range(1985, 2022):
-  #   print(f'\n\n==================== {year} ====================\n\n')
-  #   print(json.dumps(yearly(year), indent=2))
+
+  for year in range(1985, 2022):
+    yearly_json = json.dumps(yearly(year), indent=2)
+    with open(f'rcmap_{year}_manifest.json', 'w') as out:
+      out.write(yearly_json)
+
 
 if __name__ == '__main__':
   main()
