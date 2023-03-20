@@ -33,6 +33,44 @@ BUCKET = 'gs://ee-nlcd-upload/rcmap_'
 MODE = 'mode'
 MEAN = 'mean'
 
+# grep -v '_[0-9]' files.txt  | cut -d\  -f4-
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_break_point.tif
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_bare_ground_break_point.tif
+# gs://ee-nlcd-upload/rcmap_bare_ground_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_bare_ground_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_bare_ground_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_herbaceous_break_point.tif
+# gs://ee-nlcd-upload/rcmap_herbaceous_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_herbaceous_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_herbaceous_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_litter_break_point.tif
+# gs://ee-nlcd-upload/rcmap_litter_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_litter_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_litter_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_non_sagebrush_shrub_break_point.tif
+# gs://ee-nlcd-upload/rcmap_non_sagebrush_shrub_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_non_sagebrush_shrub_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_non_sagebrush_shrub_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_perennial_herbaceous_break_point.tif
+# gs://ee-nlcd-upload/rcmap_perennial_herbaceous_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_perennial_herbaceous_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_perennial_herbaceous_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_sagebrush_break_point.tif
+# gs://ee-nlcd-upload/rcmap_sagebrush_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_sagebrush_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_sagebrush_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_shrub_break_point.tif
+# gs://ee-nlcd-upload/rcmap_shrub_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_shrub_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_shrub_most_recent_break_point.tif
+# gs://ee-nlcd-upload/rcmap_total_change_intensity_index.tif
+# gs://ee-nlcd-upload/rcmap_tree_break_point.tif
+# gs://ee-nlcd-upload/rcmap_tree_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_tree_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_tree_most_recent_break_point.tif
 
 
 # bp_count 101 and 4 - 8bit unsigned - MODE
@@ -44,15 +82,24 @@ MEAN = 'mean'
 # total_change_intensity_index 101 - 8bit unsigned - mean
 # year_recent_break 0 16bit unsigned MODE
 
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_break_point.tif
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_linear_model_pvalue.tif
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_linear_model_slope.tif
+# gs://ee-nlcd-upload/rcmap_annual_herbaceous_most_recent_break_point.tif
+
+# gs://ee-nlcd-upload/rcmap_total_change_intensity_index.tif
+
 STATS_NON_YEAR = [
-    ['bp_count', MODE],
-    ['slope_linear', MEAN],
-    ['pvalue_linear', MEAN],
-    ['year_recent_break', MODE]]
+    ['break_point', MODE],
+    ['linear_model_slope', MEAN],
+    ['linear_model_pvalue', MEAN],
+    ['most_recent_break_point', MODE]]
 # total_change_intensity_index is the band name too.
 # MEAN
 TOTAL_CHANGE_INTENSITY_INDEX = 'total_change_intensity_index'
 
+# gs://ee-nlcd-upload/rcmap_tree_break_point.tif
+# gs://ee-nlcd-upload/rcmap_tree_linear_model_pvalue.tif
 
 def trends() -> dict[str, object]:
   """Returns a manifest structure."""
@@ -89,7 +136,7 @@ def trends() -> dict[str, object]:
   result = {
       'name': BASE_ID + 'RCMAP_V5_TRENDS',
       'tilesets': tilesets,
-      'bands': bands,
+      # 'bands': bands,
       'startTime': '1985-01-01T00:00:00Z',
       'endTime': '2022-01-01T00:00:00Z',
   }
