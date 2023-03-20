@@ -136,7 +136,7 @@ def trends() -> dict[str, object]:
   })
 
   result = {
-      'name': BASE_ID + 'RCMAP_V5_TRENDS',
+      'name': BASE_ID + 'trends',
       'tilesets': tilesets,
       'bands': bands,
       'startTime': '1985-01-01T00:00:00Z',
@@ -185,7 +185,7 @@ def yearly(year: int) -> dict[str, object]:
       bands.append(entry)
 
   result = {
-      'name': f'{BASE_ID}RCMAP_V5_TRENDS_year/{year}',
+      'name': f'{BASE_ID}year/{year}',
       'tilesets': tilesets,
       'bands': bands,
       'startTime': f'{year}-01-01T00:00:00Z',
