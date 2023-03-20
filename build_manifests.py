@@ -30,8 +30,7 @@ import json
 BASE_ID = 'projects/ee-rcmap/assets/RCMAP_V5_TRENDS/'
 BUCKET = 'gs://ee-nlcd-upload/rcmap_'
 
-MODE = 'mode'
-MEAN = 'mean'
+
 
 # grep -v '_[0-9]' files.txt  | cut -d\  -f4-
 # gs://ee-nlcd-upload/rcmap_annual_herbaceous_break_point.tif
@@ -88,6 +87,9 @@ MEAN = 'mean'
 # gs://ee-nlcd-upload/rcmap_annual_herbaceous_most_recent_break_point.tif
 
 # gs://ee-nlcd-upload/rcmap_total_change_intensity_index.tif
+
+MODE = 'mode'
+MEAN = 'mean'
 
 STATS_NON_YEAR = [
     ['break_point', MODE],
@@ -197,7 +199,7 @@ def main():
   print(json.dumps(trends(), indent=2))
   print('\n\n========================\n\n')
 
-  # print(json.dumps(yearly(2021), indent=2))
+  print(json.dumps(yearly(2021), indent=2))
   # for year in range(1985, 2022):
   #   print(f'\n\n==================== {year} ====================\n\n')
   #   print(json.dumps(yearly(year), indent=2))
