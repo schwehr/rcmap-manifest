@@ -72,7 +72,10 @@ LAND_TYPES = [
     'shrub', 'non_sagebrush_shrub', 'perennial_herbaceous', 'tree',
 ]
 
-STAT_TYPES = ['break_point', 'segment_pvalue', 'segment_slope']
+STAT_TYPES = [
+  ['break_point', MODE],
+  ['segment_pvalue', MEAN],
+  ['segment_slope', MEAN]]
 
 
 def yearly(year: int) -> dict[str, object]:
@@ -80,7 +83,7 @@ def yearly(year: int) -> dict[str, object]:
   BUCKET = 'gs://ee-nlcd-upload/rcmap_'
 
   tilesets = []
-  for stat_type in STAT_TYPES:
+  for stat_type, averaging in STAT_TYPES:
     for land_type in LAND_TYPES:
       name = f'{land_type}_{stat_type}'
       path = f'{BUCKET}{land_type}_{stat_type}_{year}.tif'
@@ -88,10 +91,12 @@ def yearly(year: int) -> dict[str, object]:
       tilesets.append({'id': name, 'sources': [{'uris': [path]}]})
 
   bands = []
-  for stat in STAT_TYPES:
+  for stat_type, averaging in STAT_TYPES:
     for land in LAND_TYPES:
-      name = f'{land}_{stat}'
+      name = f'{land}_{stat_type}'
       entry = {'id': name, 'tilesetId': name}
+      if averaging == MODE:
+        entry['pyramidingPolicy'] = MODE
       bands.append(entry)
 
   result = {
